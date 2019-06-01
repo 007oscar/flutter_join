@@ -11,6 +11,16 @@ class Meetup {
   Meetup(this.nombre, this.creatorId, this.descripcion, this.fecha, this.ubicacion);
 }
 
+class MeetupRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Meetups")),
+      body: MeetupList(),
+    );
+  }
+}
+
 class MeetupList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,6 +37,14 @@ class MeetupList extends StatelessWidget {
                 return new ListTile(
                   title: new Text(document['nombre']),
                   subtitle: new Text(document['descripcion']),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MeetupDetails(document['nombre'], document['descripcion'])
+                        )
+                    );
+                  }
                 );
               }).toList(),
             );
@@ -36,4 +54,35 @@ class MeetupList extends StatelessWidget {
   }
 
   MeetupList();
+}
+
+class MeetupDetails extends StatelessWidget {
+  String name;
+  String descripcion;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Meetup details')),
+      body: Column(children: <Widget>[
+        Text(this.name),
+        Text(this.descripcion),
+        Row(children: <Widget>[
+          RaisedButton(
+            onPressed: () => {},
+            child: Text(
+                'Asistiré',
+            ),
+          ),
+          RaisedButton(
+            onPressed: () => {},
+            child: Text(
+              'No asistiré',
+            ),
+          ),
+        ])
+      ])
+    );
+  }
+
+  MeetupDetails(this.name, this.descripcion);
 }

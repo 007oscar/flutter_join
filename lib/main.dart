@@ -21,10 +21,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-          appBar: AppBar(title: Text('ListViews')),
-          body: MeetupList(),
-        )
+      home: MeetupRoute(),
     );
   }
 }
